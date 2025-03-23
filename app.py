@@ -53,6 +53,9 @@ def load_data():
     exercise = pd.read_csv("exercise.csv")
     exercise_df = exercise.merge(calories, on="User_ID")
     exercise_df.drop(columns="User_ID", inplace=True)
+
+    exercise_df.dropna(inplace=True)
+    exercise_df.drop_duplicates(inplace=True)
     
     for data in [exercise_df]:
         data["BMI"] = round(data["Weight"] / ((data["Height"] / 100) ** 2), 2)
